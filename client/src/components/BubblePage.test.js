@@ -72,7 +72,7 @@ test("Fetches data and renders the bubbles", async () => {
 });
 
 
-test("ColorLists render colors", async () => {
+test("ColorList responds correctly to props", async () => {
 
   const { rerender } = render(<ColorList colors={[]}/>)
 
@@ -86,4 +86,10 @@ test("ColorLists render colors", async () => {
       // assertions to make sure episodes are rendering
       colorsArr = screen.getAllByTestId(/colors/i)
       expect(colorsArr).toHaveLength(3)
+      const color = screen.getByText(/limegreen/i)
+      expect(color).toBeInTheDocument()
+      const color2 = screen.getByText(/aquamarine/i)
+      expect(color2).toBeInTheDocument()
+      const color3 = screen.getByText(/lilac/i)
+      expect(color3).toBeInTheDocument()
 })
