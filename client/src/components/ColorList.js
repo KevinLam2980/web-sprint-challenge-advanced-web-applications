@@ -34,6 +34,8 @@ const ColorList = ({ colors, updateColors }) => {
           return color
         }
       }))
+      setEditing(false)
+      setColorToEdit(initialColor)
     })
     .catch(err => {
       console.error(err)
@@ -59,9 +61,9 @@ const ColorList = ({ colors, updateColors }) => {
   return (
     <div className="colors-wrap">
       <p>colors</p>
-      <ul>
+      <ul >
         {colors.map(color => (
-          <li key={color.color} onClick={() => editColor(color)}>
+          <li key={color.color} onClick={() => editColor(color)} data-testid="colors">
             <span>
               <span className="delete" onClick={e => {
                     e.stopPropagation();
