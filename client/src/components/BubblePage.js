@@ -5,19 +5,20 @@ import {fetchColors} from '../api/fetchColors'
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 
+const initialFormValues = {
+  code: {hex: ''},
+  color: ''
+}
+
 const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
-  const [newColor, setNewColor] = useState({
-    code: {hex: ''},
-    color: ''
-  })
+  const [newColor, setNewColor] = useState(initialFormValues)
 
   const handleChanges = evt => {
     evt.preventDefault()
     if(evt.target.name === 'hex'){
       setNewColor({...newColor, code: {hex: evt.target.value}})
     } else {
-
       setNewColor({...newColor, [evt.target.name]: evt.target.value})
     }
   }
@@ -28,6 +29,7 @@ const BubblePage = () => {
     .post('/api/colors', newColor)
     .then(res => {
       setColorList(res.data)
+      setNewColor(initialFormValues)
     })
     .catch(err => {
       console.error(err)
